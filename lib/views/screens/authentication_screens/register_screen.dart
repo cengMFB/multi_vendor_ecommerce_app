@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:multi_vendor_ecommerce_app/views/screens/authentication_screens/register_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,7 @@ class LoginScreen extends StatelessWidget {
               // Header text
               Center(
                 child: Text(
-                  "Login Your Account",
+                  "Create Your Account",
                   style: GoogleFonts.lato(
                     color: const Color(0xFF0d120E),
                     fontWeight: FontWeight.bold,
@@ -41,6 +40,14 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 30),
 
+              // Full Name input field
+              _buildInputField(
+                label: 'Full Name',
+                hintText: 'Enter your full name',
+                iconPath: 'assets/icons/user.png',
+              ),
+              const SizedBox(height: 20),
+
               // Email input field
               _buildInputField(
                 label: 'Email',
@@ -56,14 +63,23 @@ class LoginScreen extends StatelessWidget {
                 iconPath: 'assets/icons/password.png',
                 isPassword: true,
               ),
-              const SizedBox(height: 30),
-
-              // Sign In button
-              _buildSignInButton(),
               const SizedBox(height: 20),
 
-              // Sign-up suggestion row
-              _buildSignUpRow(context),
+              // Confirm Password input field
+              _buildInputField(
+                label: 'Confirm Password',
+                hintText: 'Confirm your password',
+                iconPath: 'assets/icons/password.png',
+                isPassword: true,
+              ),
+              const SizedBox(height: 30),
+
+              // Sign Up button
+              _buildSignUpButton(),
+              const SizedBox(height: 20),
+
+              // Login suggestion row
+              _buildLoginRow(context),
             ],
           ),
         ),
@@ -132,7 +148,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSignInButton() {
+  Widget _buildSignUpButton() {
     return Container(
       width: double.infinity,
       height: 50,
@@ -147,10 +163,10 @@ class LoginScreen extends StatelessWidget {
       ),
       child: TextButton(
         onPressed: () {
-          // Add your sign-in logic here
+          // Add your sign-up logic here
         },
         child: Text(
-          'Sign in',
+          'Sign Up',
           style: GoogleFonts.lato(
             fontSize: 17,
             fontWeight: FontWeight.bold,
@@ -161,12 +177,12 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSignUpRow(BuildContext context) {
+  Widget _buildLoginRow(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Need an Account? ',
+          'Already have an Account? ',
           style: GoogleFonts.nunitoSans(
             fontSize: 14,
             color: Colors.grey[700],
@@ -174,16 +190,11 @@ class LoginScreen extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            // Navigate to the sign-up screen
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) {
-                return const RegisterScreen(); // Ensure RegisterScreen is defined
-              }),
-            );
+            // Navigate back to the login screen
+            Navigator.pop(context);
           },
           child: Text(
-            'Sign Up',
+            'Login',
             style: GoogleFonts.nunitoSans(
               fontSize: 14,
               fontWeight: FontWeight.bold,
