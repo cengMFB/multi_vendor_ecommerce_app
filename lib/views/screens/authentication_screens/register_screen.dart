@@ -5,6 +5,11 @@ import 'package:multi_vendor_ecommerce_app/views/screens/authentication_screens/
 class RegisterScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  late String email;
+  late String fullName;
+  late String password;
+  late String confirmPassword;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +55,9 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ),
                   TextFormField(
+                    onChanged: (value) {
+                      fullName = value;
+                    },
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Enter Your Full Name';
@@ -94,6 +102,9 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ),
                   TextFormField(
+                    onChanged: (value) {
+                      email = value;
+                    },
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'enter your email';
@@ -138,6 +149,9 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ),
                   TextFormField(
+                    onChanged: (value) {
+                      password = value;
+                    },
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Enter your password';
@@ -173,6 +187,9 @@ class RegisterScreen extends StatelessWidget {
                     height: 20,
                   ),
                   TextFormField(
+                    onChanged: (value) {
+                      confirmPassword = value;
+                    },
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Confirm your password';
@@ -210,7 +227,10 @@ class RegisterScreen extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
-                        print('correct');
+                        print(email);
+                        print(fullName);
+                        print(password);
+                        print(confirmPassword);
                       } else {
                         print('failed');
                       }

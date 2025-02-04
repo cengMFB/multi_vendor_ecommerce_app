@@ -4,6 +4,10 @@ import 'package:multi_vendor_ecommerce_app/views/screens/authentication_screens/
 
 class LoginScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  late String email;
+  late String password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +49,9 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   TextFormField(
+                    onChanged: (value) {
+                      email = value;
+                    },
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Enter Your Email';
@@ -89,6 +96,9 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   TextFormField(
+                    onChanged: (value) {
+                      password = value;
+                    },
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Enter Your Password';
@@ -126,40 +136,32 @@ class LoginScreen extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
-                        print('correct');
+                        print(email);
+                        print(password);
                       } else {
                         print('failed');
                       }
                     },
-                    child: InkWell(
-                      onTap: () {
-                        if (_formKey.currentState!.validate()) {
-                          print('pass');
-                        } else {
-                          print('failed');
-                        }
-                      },
-                      child: Container(
-                        width: 319,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          gradient: const LinearGradient(
-                            colors: [
-                              Color(0xFF102DE1),
-                              Color(0xCC0D6EFF),
-                            ],
-                          ),
+                    child: Container(
+                      width: 319,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        gradient: const LinearGradient(
+                          colors: [
+                            Color(0xFF102DE1),
+                            Color(0xCC0D6EFF),
+                          ],
                         ),
-                        child: Center(
-                          child: Text(
-                            'Sign in',
-                            style: GoogleFonts.getFont(
-                              'Lato',
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Sign in',
+                          style: GoogleFonts.getFont(
+                            'Lato',
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
                       ),
