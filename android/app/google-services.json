@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "960895219512",
+    "project_id": "multi-vendor-app-438dd",
+    "storage_bucket": "multi-vendor-app-438dd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:960895219512:android:f412dcbbae2b37c62073cd",
+        "android_client_info": {
+          "package_name": "com.furkan.multi_vendor_ecommerce_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkwdccw5e-YLGLgz14ussCHd7IyPhdZWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
