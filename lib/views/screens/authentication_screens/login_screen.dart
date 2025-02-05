@@ -2,10 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:multi_vendor_ecommerce_app/views/screens/authentication_screens/register_screen.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   late String email;
+
   late String password;
 
   @override
@@ -167,7 +175,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Row(
@@ -190,7 +198,7 @@ class LoginScreen extends StatelessWidget {
                         child: Text(
                           'Sign Up',
                           style: GoogleFonts.roboto(
-                            color: Color.fromARGB(255, 191, 22, 238),
+                            color: const Color.fromARGB(255, 191, 22, 238),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
