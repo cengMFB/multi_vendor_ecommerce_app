@@ -24,7 +24,21 @@ class AuthController {
       });
 
       result = 'success';
-    } catch (e) {}
+    } catch (e) {
+      result = e.toString();
+    }
+    return result;
+  }
+
+  Future<String> loginUser(String email, String password) async {
+    String result = 'Something went wrong';
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      result = "success";
+    } catch (e) {
+      result = e.toString();
+    }
+
     return result;
   }
 }

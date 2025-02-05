@@ -255,7 +255,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: 20,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        registerUser();
+                      }
+                    },
                     child: Container(
                       width: 319,
                       height: 50,

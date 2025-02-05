@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:multi_vendor_ecommerce_app/controllers/auth_controller.dart';
 import 'package:multi_vendor_ecommerce_app/views/screens/authentication_screens/register_screen.dart';
+import 'package:multi_vendor_ecommerce_app/views/screens/main_screen.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -11,6 +13,23 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final AuthController _authController = AuthController();
+
+  loginUser() async {
+    String result = await _authController.loginUser(email, password);
+    if (result == 'success') {
+      Future.delayed(Duration.zero, () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return const MainScreen();
+        }));
+
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('Logged in')));
+      });
+    } else {
+      print(result);
+    }
+  }
 
   late String email;
 
@@ -144,8 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   InkWell(
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
-                        print(email);
-                        print(password);
+                        loginUser();
                       } else {
                         print('failed');
                       }
