@@ -15,6 +15,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final AuthController _authController = AuthController();
 
+  bool _isLoading = false;
+
   late String email;
 
   late String fullName;
@@ -25,7 +27,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   registerUser() async {
     BuildContext localContext = context;
-
+    setState(() {
+      _isLoading = true;
+    });
     String result = await _authController.registerNewUser(
         email, fullName, password, confirmPassword);
     if (result == 'success') {
@@ -34,8 +38,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
           return LoginScreen();
         }));
 
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text('Congrulation account have been created for you !')));
+      });
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
+      Future.delayed(Duration.zero, () {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(result)));
       });
     }
   }
@@ -273,15 +285,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                       child: Center(
-                        child: Text(
-                          'Sign up',
-                          style: GoogleFonts.getFont(
-                            'Lato',
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
+                        child: _isLoading
+                            ? const CircularProgressIndicator(
+                                color: Colors.white,
+                              )
+                            : Text(
+                                'Sign up',
+                                style: GoogleFonts.getFont(
+                                  'Lato',
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
                       ),
                     ),
                   ),
@@ -302,7 +318,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onTap: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                            return LoginScreen();
+                            return const LoginScreen();
                           }));
                         },
                         child: Text(

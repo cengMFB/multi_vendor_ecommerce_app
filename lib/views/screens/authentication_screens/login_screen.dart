@@ -14,20 +14,30 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final AuthController _authController = AuthController();
+  bool _isLoading = false;
 
   loginUser() async {
+    setState(() {
+      _isLoading = true;
+    });
     String result = await _authController.loginUser(email, password);
     if (result == 'success') {
       Future.delayed(Duration.zero, () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return const MainScreen();
+          return MainScreen();
         }));
 
         ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text('Logged in')));
       });
     } else {
-      print(result);
+      setState(() {
+        _isLoading = false;
+      });
+      Future.delayed(Duration.zero, () {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(result)));
+      });
     }
   }
 
@@ -181,15 +191,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       child: Center(
-                        child: Text(
-                          'Sign in',
-                          style: GoogleFonts.getFont(
-                            'Lato',
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
+                        child: _isLoading
+                            ? const CircularProgressIndicator(
+                                color: Colors.white,
+                              )
+                            : Text(
+                                'Sign in',
+                                style: GoogleFonts.getFont(
+                                  'Lato',
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
                       ),
                     ),
                   ),
