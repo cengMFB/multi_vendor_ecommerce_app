@@ -5,8 +5,11 @@ class AuthController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<String> registerNewUser(String email, String fullName, String password,
-      String confirmPassword) async {
+  Future<String> registerNewUser(
+    String email,
+    String fullName,
+    String password,
+  ) async {
     String result = 'Something went wrong';
     try {
       UserCredential userCredential = await _auth

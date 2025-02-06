@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:multi_vendor_ecommerce_app/views/screens/authentication_screens/register_screen.dart';
 
 void main() async {
@@ -24,6 +25,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',

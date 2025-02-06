@@ -4,7 +4,7 @@ import 'package:multi_vendor_ecommerce_app/controllers/auth_controller.dart';
 import 'package:multi_vendor_ecommerce_app/views/screens/authentication_screens/login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
-  RegisterScreen({super.key});
+  const RegisterScreen({super.key});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -23,19 +23,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   late String password;
 
-  late String confirmPassword;
+  bool _isObsecure = true;
 
   registerUser() async {
     BuildContext localContext = context;
     setState(() {
       _isLoading = true;
     });
-    String result = await _authController.registerNewUser(
-        email, fullName, password, confirmPassword);
+    String result =
+        await _authController.registerNewUser(email, fullName, password);
     if (result == 'success') {
       Future.delayed(Duration.zero, () {
         Navigator.push(localContext, MaterialPageRoute(builder: (context) {
-          return LoginScreen();
+          return const LoginScreen();
         }));
 
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -191,6 +191,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   TextFormField(
+                    obscureText: _isObsecure,
                     onChanged: (value) {
                       password = value;
                     },
@@ -222,46 +223,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           height: 20,
                         ),
                       ),
-                      suffixIcon: const Icon(Icons.visibility),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _isObsecure = !_isObsecure;
+                          });
+                        },
+                        icon: Icon(
+                          _isObsecure ? Icons.visibility : Icons.visibility_off,
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(
                     height: 20,
-                  ),
-                  TextFormField(
-                    onChanged: (value) {
-                      confirmPassword = value;
-                    },
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Confirm your password';
-                      } else {
-                        return null;
-                      }
-                    },
-                    decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(9)),
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      labelText: 'Confirm your password',
-                      labelStyle: GoogleFonts.getFont(
-                        'Nunito Sans',
-                        fontSize: 14,
-                        letterSpacing: 0.1,
-                      ),
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Image.asset(
-                          'assets/icons/password.png',
-                          width: 20,
-                          height: 20,
-                        ),
-                      ),
-                      suffixIcon: const Icon(Icons.visibility),
-                    ),
                   ),
                   const SizedBox(
                     height: 20,

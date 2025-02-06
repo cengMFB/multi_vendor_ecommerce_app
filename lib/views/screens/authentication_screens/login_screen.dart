@@ -14,7 +14,10 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final AuthController _authController = AuthController();
+
   bool _isLoading = false;
+
+  bool _isObsecure = true;
 
   loginUser() async {
     setState(() {
@@ -133,6 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   TextFormField(
+                    obscureText: _isObsecure,
                     onChanged: (value) {
                       password = value;
                     },
@@ -164,7 +168,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 20,
                         ),
                       ),
-                      suffixIcon: const Icon(Icons.visibility),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _isObsecure = !_isObsecure;
+                          });
+                        },
+                        icon: Icon(
+                          _isObsecure ? Icons.visibility : Icons.visibility_off,
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(
