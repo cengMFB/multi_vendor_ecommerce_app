@@ -2,7 +2,9 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:multi_vendor_ecommerce_app/views/screens/authentication_screens/register_screen.dart';
+import 'package:multi_vendor_ecommerce_app/views/screens/authentication_screens/login_screen.dart';
+import 'package:multi_vendor_ecommerce_app/views/screens/main_screen.dart';
+import 'package:multi_vendor_ecommerce_app/views/screens/nav_screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: RegisterScreen(),
+      home: const MainScreen(),
     );
   }
 }

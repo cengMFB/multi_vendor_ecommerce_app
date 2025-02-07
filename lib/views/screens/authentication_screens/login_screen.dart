@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (result == 'success') {
       Future.delayed(Duration.zero, () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return MainScreen();
+          return const MainScreen();
         }));
 
         ScaffoldMessenger.of(context)
@@ -237,7 +237,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onTap: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                            return RegisterScreen();
+                            return const RegisterScreen();
                           }));
                         },
                         child: Text(
